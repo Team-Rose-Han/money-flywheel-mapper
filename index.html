@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Money Flywheel Mapper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Lato:wght@400;700&display=swap">
+<link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<div id="gate" class="wrap gate" hidden>
+  <form class="box" id="gateform">
+    <span class="brand-pill">30 Minute Money</span>
+    <h1 class="h-display">Money Flywheel Mapper</h1>
+    <p class="lede">This tool is for members. Enter the access code from the community page to continue.</p>
+    <label class="eyebrow" for="code">Access code</label>
+    <div class="textrow"><input id="code" type="text" autocomplete="off" autocapitalize="characters" placeholder="Enter code"><button class="btn" type="submit">Unlock</button></div>
+    <p class="err" id="gateerr" aria-live="polite"></p>
+  </form>
+</div>
+
+<main id="app" class="wrap" hidden>
+  <header class="top">
+    <div class="titles">
+      <span class="brand-pill">30 Minute Money</span>
+      <h1 class="h-display">Find your account combo</h1>
+      <p class="lede">A few questions about how you earn and where you are on the Financial Waterfall. You get the exact set of accounts to open, one map of how money flows between them, and the one goal to fund right now.</p>
+    </div>
+  </header>
+
+  <div class="stage">
+    <section class="panel" id="panel" aria-live="polite"></section>
+
+    <section class="map-card" id="mapcard">
+      <div class="map-head">
+        <div>
+          <span class="eyebrow">Your money system</span>
+          <div class="combo" id="mapcombo"></div>
+          <p class="footnote" id="mapsub"></p>
+        </div>
+        <span class="tag preview" id="maptag"></span>
+      </div>
+      <div class="map-scroll"><div class="map" id="map"></div></div>
+      <div class="legend">
+        <span><i></i> Open now</span>
+        <span><i class="g"></i> Fund this now (your #1 goal)</span>
+        <span><i class="l"></i> Open at a later step</span>
+        <span>✓ Done or maxed this year, keep it on autopilot</span>
+      </div>
+    </section>
+
+    <section class="results" id="results" hidden>
+      <div class="goal-card" id="goalcard"></div>
+      <div>
+        <div class="map-head"><div><span class="eyebrow">Your checklist</span><h2 class="h-display" style="font-size:24px">Accounts to open</h2></div>
+          <div class="actions"><button class="btn ghost" id="copy">Copy checklist</button><button class="btn coral" id="png">Download map as PNG</button></div></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Account</th><th>Type</th><th>Waterfall</th><th>Status</th><th>Where to open it</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table></div>
+      </div>
+      <p class="footnote">This tool teaches Rose's money system. It is education, not personalized financial, tax or legal advice. Contribution limits and income thresholds change every year; confirm the current numbers at irs.gov before you fund an account.</p>
+    </section>
+  </div>
+</main>
+
+<div id="overlay" class="overlay" hidden>
+  <div class="sheet">
+    <div class="nav"><span class="eyebrow">Your map</span><div class="actions"><a class="btn" id="dl" download="my-money-flywheel-map.png" href="#">Save PNG</a><button class="btn ghost" id="close">Close</button></div></div>
+    <img id="shot" alt="Your money system map">
+    <p class="footnote">On a phone, press and hold the image to save it.</p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="config.js"></script>
+<script src="tree.js?v=4"></script>
+<script src="app.js?v=4"></script>
+</body>
+</html>
