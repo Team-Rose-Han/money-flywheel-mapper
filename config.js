@@ -15,24 +15,16 @@ window.MAPPER_CONFIG = {
   // When the tool is embedded (iframe) on one of these hosts, no code is asked.
   allowedEmbedHosts: ["programs.rosehan.com", "rosehan.com", "circle.so"],
 
-  // ---- Tax-year numbers (verify at irs.gov every January) ---
-  taxYear: 2026,
-  // Roth IRA income phase-out START by filing status. Above this, use the Backdoor Roth.
-  rothPhaseoutStart: { single: 153000, mfj: 242000 },
-  starterEmergencyFund: 2000,
-  emergencyMonths: 6,
-
-  // ---- "Where to open it" links ----------------------------
-  // Leave a link empty and the checklist shows "Rose's pick coming soon".
-  // Fill these with affiliate links when the tools hub is ready.
+  // ---- Recommended banks --------------------------------------
+  // Shown as a link on the "which bank" screens. Leave a url empty and no link appears.
   links: {
-    checking:  { label: "", url: "" },   // hub, bills, spending, upcoming, business checking
-    hysa:      { label: "", url: "" },   // emergency fund, dream fund, house fund, taxes set-aside
-    roth:      { label: "", url: "" },   // Roth IRA / Backdoor Roth IRA
-    brokerage: { label: "", url: "" },   // taxable brokerage
-    solo401k:  { label: "", url: "" },
-    sepIra:    { label: "", url: "" },
-    hsa:       { label: "", url: "" },
-    plan529:   { label: "", url: "" },
+    checking:    { label: "Rose's recommended banks for personal checking", url: "" },
+    bizChecking: { label: "Rose's recommended banks for business checking", url: "" },
   },
+
+  // ---- The one rule about where to open accounts -----------
+  // Shown on the screen before members match each box to a real account.
+  bankRule: "Open all your personal checking accounts at the same bank, so transfers land instantly and you see the whole system on one screen. Business checking can be at a different bank.",
+  bizBankRule: "Open all your business checking accounts at the same bank, so transfers land instantly and you see the whole business on one screen. It can be a different bank from your personal accounts.",
+
 };
