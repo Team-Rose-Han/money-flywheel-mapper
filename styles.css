@@ -1,11 +1,12 @@
 /* ============================================================
    Money Flywheel Mapper — styles
-   Palette follows the 30 Minute Money map: cream ground, navy pill,
-   thin blue connectors, black outlined boxes, coral for "do this now".
+   Palette follows the 30 Minute Money map: white ground, the black logo,
+   navy pills, thin blue connectors, black outlined boxes, coral buttons.
+   Single light theme on purpose: the logo is black on white.
    ============================================================ */
 :root {
-  --bg: #ede9e4;
-  --card: #fbfaf8;
+  --bg: #ffffff;
+  --card: #ffffff;
   --ink: #141414;
   --muted: #6b6661;
   --navy: #0b1d80;
@@ -14,9 +15,6 @@
   --coral: #ff7a5c;
   --coral-ink: #a8321a;
   --coral-soft: #ffe3da;
-  --later: #b7b1aa;
-  --ok: #2e7d5b;
-  --ok-soft: #dcefe6;
   --lime: #d9ff3b;
   --border: #d9d4cd;
   --focus: #1e3ab8;
@@ -25,49 +23,6 @@
   --display: "Poppins", "Avenir Next", "Helvetica Neue", Arial, sans-serif;
   --body: "Lato", "Avenir", "Helvetica Neue", Arial, sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    color-scheme: dark;
-    --bg: #15171d;
-    --card: #1f222b;
-    --ink: #f2efea;
-    --muted: #a49f98;
-    --navy: #3a55e6;
-    --navy-ink: #ffffff;
-    --line: #7d92f2;
-    --coral: #ff8a6e;
-    --coral-ink: #ffb8a6;
-    --coral-soft: #4a2a22;
-    --later: #5c5751;
-    --ok: #6fd3a3;
-    --ok-soft: #1f3a2f;
-    --lime: #c9f02f;
-    --border: #363a45;
-    --focus: #7d92f2;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
-  }
-}
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #15171d;
-  --card: #1f222b;
-  --ink: #f2efea;
-  --muted: #a49f98;
-  --navy: #3a55e6;
-  --navy-ink: #ffffff;
-  --line: #7d92f2;
-  --coral: #ff8a6e;
-  --coral-ink: #ffb8a6;
-  --coral-soft: #4a2a22;
-  --later: #5c5751;
-  --ok: #6fd3a3;
-  --ok-soft: #1f3a2f;
-  --lime: #c9f02f;
-  --border: #363a45;
-  --focus: #7d92f2;
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35);
-}
-
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; }
@@ -119,6 +74,10 @@ button { font: inherit; color: inherit; }
   margin-bottom: 28px;
 }
 .top .titles { display: grid; gap: 8px; }
+.brandline { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+.logo { display: block; width: 118px; height: auto; }
+.divider { width: 1.5px; align-self: stretch; min-height: 34px; background: var(--border); }
+.brandline .h-display { font-size: clamp(22px, 2.8vw, 30px); }
 .brand-pill {
   display: inline-flex;
   align-items: center;
@@ -137,6 +96,7 @@ button { font: inherit; color: inherit; }
 
 /* --- layout: questions + map --- */
 .stage { display: grid; gap: 28px; }
+.stage > *, .results > * { min-width: 0; } /* keep the scrolling table from widening the page */
 
 /* --- question panel --- */
 .panel {
@@ -145,35 +105,22 @@ button { font: inherit; color: inherit; }
   border-radius: 18px;
   box-shadow: var(--shadow);
   padding: 22px 24px 24px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  /* Same height on every question so Back never moves. */
+  min-height: 340px;
 }
-.progress { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.progress .bar {
-  flex: 1 1 160px;
-  height: 6px;
-  border-radius: 999px;
-  background: var(--border);
-  overflow: hidden;
-}
-.progress .bar i {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: var(--navy);
-  border-radius: 999px;
-  transition: width 240ms ease;
-}
-.progress .count { font-family: var(--display); font-weight: 600; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
-
+.panel .nav { margin-top: auto; }
 .question { display: grid; gap: 14px; }
+.question .help { font-size: 14px; }
+.question .help a { color: var(--line); font-weight: 700; }
 .question h2 {
   font-family: var(--display);
   font-weight: 600;
   font-size: clamp(20px, 2.4vw, 26px);
   line-height: 1.25;
 }
-.question .help { color: var(--muted); max-width: 62ch; }
 .options { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
 .opt {
   text-align: left;
@@ -186,7 +133,7 @@ button { font: inherit; color: inherit; }
   gap: 2px;
   transition: transform 120ms ease, background 120ms ease;
 }
-.opt:hover { transform: translateY(-1px); background: var(--bg); }
+.opt:hover { transform: translateY(-1px); background: #f4f2ef; }
 .opt .t { font-family: var(--display); font-weight: 600; font-size: 15px; }
 .opt .s { font-size: 13px; color: var(--muted); }
 .opt[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--navy-ink); }
@@ -194,7 +141,7 @@ button { font: inherit; color: inherit; }
 
 .textrow { display: flex; gap: 10px; flex-wrap: wrap; }
 .textrow input {
-  flex: 1 1 240px;
+  flex: 1 1 180px;
   font: inherit;
   padding: 12px 14px;
   border: 2px solid var(--ink);
@@ -219,25 +166,13 @@ button { font: inherit; color: inherit; }
 .btn:disabled { opacity: 0.45; cursor: default; }
 .nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
 
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip {
-  border: 1.5px solid var(--border);
-  background: var(--bg);
-  border-radius: 999px;
-  padding: 5px 11px;
-  font-size: 12.5px;
-  cursor: pointer;
-}
-.chip b { font-weight: 700; }
-.chip:hover { border-color: var(--ink); }
-
 /* --- done state --- */
 .done-head { display: grid; gap: 8px; }
 .done-head h2 { font-family: var(--display); font-weight: 700; font-size: clamp(22px, 2.8vw, 30px); }
 
 /* --- map card --- */
 .map-card {
-  background: var(--bg);
+  background: var(--card);
   border: 1.5px solid var(--border);
   border-radius: 18px;
   padding: 28px 24px 30px;
@@ -258,27 +193,49 @@ button { font: inherit; color: inherit; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
-.tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+.mapnav { margin-top: 24px; }
+/* final map: a field inside each box, and the printed label the PNG shows instead */
+.node .acct-row { margin-top: 8px; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; }
+.node .acct-bank { font-size: 12px; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 96px; }
+.node .acct-in {
+  width: 58px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 5px 4px;
+  border: 1.5px dashed var(--navy);
+  border-radius: 8px;
+  background: #f7f6f3;
+  color: var(--ink);
+}
+.node .acct-in::placeholder { color: var(--muted); font-weight: 400; letter-spacing: 0.1em; }
+.node .acct { display: none; margin-top: 8px; font-size: 12px; font-weight: 700; color: var(--ink); }
+.node .acct.open { color: var(--coral-ink); font-family: var(--display); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; }
+.map-card.exporting .acct-row { display: none; }
+.map-card.exporting .acct { display: block; }
+td .have { font-weight: 700; }
+.status.open {
+  display: inline-block;
   font-family: var(--display);
-  font-weight: 600;
-  font-size: 11px;
+  font-weight: 700;
+  font-size: 10.5px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 6px 10px;
+  padding: 4px 9px;
   border-radius: 999px;
-  background: var(--lime);
-  color: #1a1a1a;
+  background: var(--coral);
+  color: #1a0d09;
+  white-space: nowrap;
 }
-.tag.preview { background: var(--border); color: var(--ink); }
+.err { color: var(--coral-ink); font-size: 14px; }
 
 .map-scroll { overflow-x: auto; }
 .map {
   position: relative;
   display: grid;
-  gap: 56px 22px;
+  gap: 56px 16px;
   align-items: start;
   min-width: 640px;
   padding: 6px 4px;
@@ -292,7 +249,7 @@ button { font: inherit; color: inherit; }
   overflow: visible;
 }
 .map svg.links path, .map svg.links line { stroke: var(--line); stroke-width: 2; fill: none; }
-.map svg.links circle { fill: var(--line); }
+.map svg.links marker path.head { stroke: none; fill: var(--line); }
 .map svg.links text {
   font-family: var(--display);
   font-weight: 700;
@@ -330,100 +287,31 @@ button { font: inherit; color: inherit; }
   color: var(--navy-ink);
   border-radius: 12px;
   padding: 18px 26px;
-  min-width: 200px;
+  min-width: 150px;
 }
 .node.pill .type { color: rgba(255, 255, 255, 0.75); }
-.node.hub { min-height: 84px; padding-inline: 28px; }
-.node.bucket { min-height: 190px; }
-.node.small { min-height: 64px; padding: 12px 10px; }
-.node.stackitem { padding: 14px 12px; }
-.node.later { border-style: dashed; border-color: var(--later); color: var(--muted); background: transparent; }
-.node.later .name { color: var(--muted); }
-.node.goal { border-color: var(--coral); border-width: 3px; box-shadow: 0 0 0 5px var(--coral-soft); }
-.node.goal .badge {
-  position: absolute;
-  top: -12px;
-  right: 10px;
-  background: var(--coral);
-  color: #1a0d09;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 9.5px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  padding: 4px 9px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-.node .check {
-  position: absolute;
-  top: -9px;
-  right: -9px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--ok);
-  color: #fff;
-  font-size: 13px;
-  line-height: 22px;
-  text-align: center;
-  font-weight: 700;
-}
-.node .stepno {
-  position: absolute;
-  top: -9px;
-  left: 10px;
-  background: var(--card);
-  border: 1.5px solid currentColor;
-  border-radius: 999px;
-  font-family: var(--display);
-  font-weight: 700;
-  font-size: 9.5px;
-  letter-spacing: 0.08em;
-  padding: 1px 7px;
-}
-.node.later .stepno { background: var(--bg); }
-
-.stack { display: grid; gap: 18px; align-content: start; }
+.node.pill.later { background: var(--card); color: var(--navy); border: 2px dashed var(--navy); }
+.node.hub { min-height: 96px; padding-inline: 28px; }
+.node.bucket { min-height: 150px; }
+.node.small { min-height: 72px; padding: 14px 12px; }
 .incomes { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 .spacer { min-width: 40px; }
 .cell-center { display: flex; justify-content: center; }
 
-/* --- legend --- */
-.legend { display: flex; flex-wrap: wrap; gap: 14px 22px; margin-top: 22px; font-size: 12.5px; color: var(--muted); }
-.legend span { display: inline-flex; align-items: center; gap: 8px; }
-.legend i { width: 18px; height: 12px; border: 2px solid var(--ink); border-radius: 4px; display: inline-block; }
-.legend i.g { border-color: var(--coral); box-shadow: 0 0 0 2px var(--coral-soft); }
-.legend i.l { border-style: dashed; border-color: var(--later); }
-
 /* --- results below the map --- */
 .results { display: grid; gap: 22px; }
-.goal-card {
-  background: var(--card);
-  border: 2.5px solid var(--coral);
-  border-radius: 18px;
-  padding: 22px 24px;
-  display: grid;
-  gap: 12px;
-  box-shadow: var(--shadow);
-}
-.goal-card .stepline { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-.goal-card .num {
+.rule {
   font-family: var(--display);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.16em;
-  background: var(--coral);
-  color: #1a0d09;
-  padding: 5px 10px;
-  border-radius: 999px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.45;
+  max-width: 72ch;
+  padding: 12px 16px;
+  border-left: 4px solid var(--navy);
+  background: #f4f2ef;
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 14px;
 }
-.goal-card h3 { font-family: var(--display); font-weight: 700; font-size: clamp(20px, 2.6vw, 26px); }
-.goal-card .grid2 { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.goal-card .grid2 > div { display: grid; gap: 4px; }
-.goal-card .lbl { font-family: var(--display); font-weight: 700; font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
-.goal-card .target { font-weight: 700; }
-
 .table-wrap { overflow-x: auto; background: var(--card); border: 1.5px solid var(--border); border-radius: 18px; }
 table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 14px; }
 th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
@@ -431,23 +319,21 @@ th { font-family: var(--display); font-weight: 700; font-size: 10.5px; letter-sp
 tr:last-child td { border-bottom: 0; }
 td .nm { font-weight: 700; }
 td .nt { color: var(--muted); font-size: 13px; }
-.status {
-  display: inline-block;
+td.job { color: var(--muted); font-size: 13px; max-width: 34ch; }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
   font-family: var(--display);
   font-weight: 600;
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 4px 9px;
+  color: var(--muted);
+  border: 1.5px solid var(--border);
   border-radius: 999px;
-  border: 1.5px solid currentColor;
-  white-space: nowrap;
+  padding: 2px 8px;
+  margin-left: 6px;
+  vertical-align: middle;
 }
-.status.goal { background: var(--coral); border-color: var(--coral); color: #1a0d09; }
-.status.active { color: var(--ok); background: var(--ok-soft); border-color: transparent; }
-.status.later { color: var(--muted); }
-
-.actions { display: flex; gap: 10px; flex-wrap: wrap; }
 .footnote { color: var(--muted); font-size: 12.5px; max-width: 78ch; }
 
 /* --- export overlay --- */
@@ -475,16 +361,18 @@ td .nt { color: var(--muted); font-size: 13px; }
   border-radius: 18px;
   box-shadow: var(--shadow);
   padding: 32px 28px;
-  max-width: 440px;
+  max-width: 520px;
   width: 100%;
   display: grid;
   gap: 14px;
 }
-.gate .err { color: var(--coral-ink); font-size: 14px; }
 
 /* --- responsive --- */
 @media (max-width: 720px) {
   .wrap { padding-inline: 16px; }
+  .panel { min-height: 510px; }
+  .brandline { gap: 10px; }
+  .brandline .divider { display: none; }
   .map { min-width: 0; grid-template-columns: 1fr !important; gap: 22px; }
   .map svg.links { display: none; }
   .map .cell { grid-column: auto !important; grid-row: auto !important; }
@@ -492,7 +380,6 @@ td .nt { color: var(--muted); font-size: 13px; }
   .node.pill { width: 100%; }
   .spacer { display: none; }
   .incomes { flex-direction: column; }
-  .stack { gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
